@@ -87,9 +87,8 @@ require __DIR__.'/auth.php';
 
 // Admin (Blade) Dashboard//////////
 
-Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
+Route::prefix('kasc')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        // Get real statistics from database
         $stats = [
             'total_services' => Service::count(),
             'total_gallery_items' => GalleryItem::count(),
@@ -97,7 +96,7 @@ Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
             'recent_requests' => \App\Models\ServiceRequest::where('created_at', '>=', now()->subDay())->count(),
         ];
         return view('admin.dashboard', compact('stats'));
-    })->name('admin.dashboard');
+    })->name('kasc.dashboard');
 
     // Services CRUD
     Route::resource('/services', \App\Http\Controllers\Admin\ServiceController::class);

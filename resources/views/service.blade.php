@@ -105,9 +105,104 @@
       </section>
     </main>
 
-    <footer class="bg-dark text-white text-center py-4">
+<!-- Footer -->
+    <footer class="bg-dark text-white py-5">
       <div class="container">
-        <p class="mb-0">&copy; 2024 مؤسسة الكمال. جميع الحقوق محفوظة.</p>
+        <div class="row">
+          <!-- Company Info -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <!-- Logo -->
+            <div class="mb-3">
+              <img src="{{ asset('image/0.jpg') }}" alt="{{ $settings['site_name'] }} Logo" class="footer-logo img-fluid" style="max-height: 80px; border-radius: 8px;">
+            </div>
+            <h5 class="fw-bold mb-3">{{ $settings['site_name'] }}</h5>
+            <p class="text-white-50">
+              نقدم حلولاً متكاملة ومتخصصة في خدمات التنظيف والصيانة بأعلى معايير الجودة والاحترافية
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              @if(!empty($settings['facebook']))
+              <a href="{{ $settings['facebook'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              @endif
+              @if(!empty($settings['twitter']))
+              <a href="{{ $settings['twitter'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              @endif
+              @if(!empty($settings['instagram']))
+              <a href="{{ $settings['instagram'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+              @endif
+            </div>
+          </div>
+          
+          <!-- Quick Links -->
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">روابط سريعة</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="/services" class="text-white-50 text-decoration-none hover-white">خدماتنا</a></li>
+              <li class="mb-2"><a href="/gallery" class="text-white-50 text-decoration-none hover-white">معرض الأعمال</a></li>
+              <li class="mb-2"><a href="/about" class="text-white-50 text-decoration-none hover-white">من نحن</a></li>
+              <li class="mb-2"><a href="/contact" class="text-white-50 text-decoration-none hover-white">اتصل بنا</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact Info -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">معلومات التواصل</h6>
+            <ul class="list-unstyled text-white-50">
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:{{ $settings['phone'] ?? '01000000000' }}" class="text-white-50 text-decoration-none hover-white">
+                  {{ $settings['phone'] ?? '01000000000' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fab fa-whatsapp me-2"></i>
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', '+2'.$settings['phone'] ?? '01000000000') }}" class="text-white-50 text-decoration-none hover-white" target="_blank">
+                  {{ $settings['phone'] ?? '01000000000' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:{{ $settings['email'] ?? 'info@example.com' }}" class="text-white-50 text-decoration-none hover-white">
+                  {{ $settings['email'] ?? 'info@example.com' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                {{ $settings['address'] ?? 'العنوان غير محدد' }}
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Working Hours -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">ساعات العمل</h6>
+            <ul class="list-unstyled text-white-50">
+              <li class="mb-2">السبت - الخميس: 9:00 ص - 8:00 م</li>
+              <li class="mb-2">الجمعة: 10:00 ص - 6:00 م</li>
+              <li class="mb-2">الطوارئ: متاح على مدار 24 ساعة</li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr class="border-secondary my-4">
+        
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0 text-white-50">
+              &copy; {{ date('Y') }} {{ $settings['site_name'] }}. جميع الحقوق محفوظة.
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0 text-white-50">
+              صُمم بـ ❤️ بواسطة فريق {{ $settings['site_name'] }}
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
 

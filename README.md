@@ -1,66 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo">
+  <br>
+  <h1>CleanService - خدمات التنظيف المتخصصة</h1>
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-10+-FF2D20" alt="Laravel Version">
+  <img src="https://img.shields.io/badge/PHP-8.0+-777BB4" alt="PHP Version">
+  <img src="https://img.shields.io/badge/MySQL-8.0+-4479A1" alt="Database">
+  <img src="https://img.shields.io/badge/Bootstrap-5.3+-7952B3" alt="Frontend">
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🧹 CleanService
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+نظام إدارة خدمات التنظيف المتكامل - منصة احترافية لعرض وإدارة خدمات التنظيف والصيانة مع معرض أعمال تفاعلي ونظام طلبات متقدم.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### ✨ المميزات الرئيسية
 
-## Learning Laravel
+- 🏠 **عرض الخدمات**: عرض احترافي لجميع خدمات التنظيف المتاحة
+- 🖼️ **معرض الأعمال**: معرض صور تفاعلي مع تصفية حسب الفئات
+- 📞 **نظام الطلبات**: استقبال طلبات الخدمات من العملاء
+- 📊 **لوحة تحكم**: لوحة تحكم متكاملة لإدارة المحتوى والإحصائيات
+- 📱 **تصميم متجاوب**: يعمل على جميع الأجهزة بكفاءة
+- 🌐 **SEO Ready**: محسّن لمحركات البحث بـ Meta Tags كاملة
+- 🎨 **تصميم عصري**: واجهة مستخدم جذابة وسهلة الاستخدام
+- 🔄 **RTL Support**: دعم كامل للغة العربية والاتجاه من اليمين لليسار
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🛠️ التقنيات المستخدمة
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Backend**: Laravel 10
+- **Frontend**: Bootstrap 5, Font Awesome, jQuery
+- **Database**: MySQL 8.0+
+- **Authentication**: Laravel Breeze
+- **File Storage**: Laravel Storage System
+- **Deployment**: Laragon (Local), Ready for production
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📋 المتطلبات
 
-## Laravel Sponsors
+- PHP 8.0 أو أعلى
+- Composer
+- MySQL 8.0+ أو MariaDB
+- Node.js & NPM (للـ Frontend assets)
+- Laragon أو XAMPP (للتطوير المحلي)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🚀 التركيب
 
-### Premium Partners
+1. **نسخ المشروع**
+   ```bash
+   git clone <repository-url>
+   cd cleanService
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **تثبيت الحزم**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Contributing
+3. **إعداد البيئة**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **إعدادات قاعدة البيانات**
+   ```bash
+   # تحديث ملف .env مع معلومات قاعدة البيانات
+   DB_DATABASE=clean_service
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## Code of Conduct
+5. **تنفيذ الترحيل**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **ربط الملفات التخزينية**
+   ```bash
+   php artisan storage:link
+   ```
 
-## Security Vulnerabilities
+7. **تشغيل الخادم**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 📁 هيكل المشروع
 
-## License
+```
+cleanService/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── Admin/           # لوحة التحكم
+│   │   └── Front/           # واجهة المستخدم
+│   ├── Models/              # نماذج البيانات
+│   └── Providers/           # Service Providers
+├── database/
+│   ├── migrations/          # ترحيل قاعدة البيانات
+│   └── seeders/             # بيانات تجريبية
+├── resources/
+│   ├── views/
+│   │   ├── admin/           # صفحات لوحة التحكم
+│   │   └── *.blade.php      # صفحات الموقع
+│   └── js/                  # ملفات JavaScript
+├── public/
+│   ├── image/               # صور الموقع
+│   └── storage/             # ملفات مرفوعة
+└── routes/
+    ├── web.php              # مسارات الموقع
+    └── auth.php             # مسارات المصادقة
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 🔐 لوحة التحكم
+
+الوصول إلى لوحة التحكم:
+- **URL**: `/kasc`
+- **الصفحة الرئيسية**: `/kasc/dashboard`
+- **الخدمات**: `/kasc/services`
+- **معرض الأعمال**: `/kasc/gallery`
+- **الطلبات**: `/kasc/requests`
+- **الإعدادات**: `/kasc/settings`
+
+### 📊 المميزات الإدارية
+
+- 📈 **إحصائيات حية**: عرض إحصائيات المشروع في الوقت الفعلي
+- 🔧 **إدارة الخدمات**: إضافة وتعديل وحذف الخدمات
+- 🖼️ **إدارة المعرض**: رفع وتنظيم صور الأعمال
+- 📝 **إدارة الطلبات**: متابعة طلبات العملاء
+- ⚙️ **إعدادات الموقع**: تحديث معلومات الشركة ووسائل التواصل
+
+### 🎨 التخصيص
+
+- **اللغة**: العربية (RTL)
+- **الشعار**: `public/image/0.jpg`
+- **الألوان**: قابلة للتخصيص عبر CSS
+- **الخطوط**: Tajawal للعربية
+
+### 📱 التوافق
+
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Mobile Responsive
+
+### 🚀 النشر
+
+لنشر المشروع على الإنتاج:
+
+1. **إعداد البيئة الإنتاجية**
+   ```bash
+   APP_ENV=production
+   APP_DEBUG=false
+   ```
+
+2. **تحسين الأداء**
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+3. **تشغيل Queue Worker** (اختياري)
+   ```bash
+   php artisan queue:work
+   ```
+
+### 🤝 المساهمة
+
+للمساهمة في تطوير المشروع:
+
+1. Fork المشروع
+2. إنشاء فرع جديد (`git checkout -b feature/AmazingFeature`)
+3. إcommit التغييرات (`git commit -m 'Add some AmazingFeature'`)
+4. دفع الفرع (`git push origin feature/AmazingFeature`)
+5. إنشاء Pull Request
+
+### 📞 الدعم
+
+لأي استفسارات أو مشاكل:
+- 📧 البريد الإلكتروني: `info@example.com`
+- 📞 الهاتف: `01000000000`
+- 💬 WhatsApp: `+201000000000`
+
+### 📜 الرخصة
+
+هذا المشروع مرخص تحت رخصة MIT License - راجع ملف [LICENSE](LICENSE) للتفاصيل.
+
+---
+
+<p align="center">
+  <strong>🧹 CleanService - حلول التنظيف المتكاملة</strong><br>
+  <em>صُمم بـ ❤️ بواسطة فريق CleanService</em>
+</p>

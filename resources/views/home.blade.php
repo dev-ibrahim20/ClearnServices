@@ -5,8 +5,40 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ $settings['site_name'] }} | الرئيسية</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ $settings['site_description'] ?? 'نقدم حلولاً متكاملة ومتخصصة في خدمات التنظيف والصيانة بأعلى معايير الجودة والاحترافية' }}">
+    <meta name="keywords" content="تنظيف, صيانة, خدمات تنظيف, تنظيف منازل, صيانة طوارئ">
+    <meta name="author" content="{{ $settings['site_name'] }}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ $settings['site_name'] }} | الرئيسية">
+    <meta property="og:description" content="{{ $settings['site_description'] ?? 'نقدم حلولاً متكاملة ومتخصصة في خدمات التنظيف والصيانة بأعلى معايير الجودة والاحترافية' }}">
+    <meta property="og:image" content="{{ asset('image/0.jpg') }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ $settings['site_name'] }}">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $settings['site_name'] }} | الرئيسية">
+    <meta name="twitter:description" content="{{ $settings['site_description'] ?? 'نقدم حلولاً متكاملة ومتخصصة في خدمات التنظيف والصيانة بأعلى معايير الجودة والاحترافية' }}">
+    <meta name="twitter:image" content="{{ asset('image/0.jpg') }}">
+    
+    <!-- Additional Meta Tags -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ $settings['site_name'] }} - خدمات التنظيف والصيانة">
+    <meta name="twitter:image:alt" content="{{ $settings['site_name'] }} - خدمات التنظيف والصيانة">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/0.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('image/0.jpg') }}">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +49,15 @@
         scroll-behavior: smooth;
         background-color: #f8f9fa;
       }
+      
+      /* Footer Hover Effects */
+      .hover-white {
+        transition: color 0.3s ease;
+      }
+      .hover-white:hover {
+        color: #fff !important;
+      }
+      
       .hero-bg {
         background-image: linear-gradient(rgba(0, 20, 40, 0.75), rgba(0, 20, 40, 0.75)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1470&q=80');
         background-size: cover;
@@ -99,37 +140,41 @@
       <!-- Hero Section -->
       <section id="hero" class="hero-bg text-center">
         <div class="container">
+          <!-- Logo -->
+          <div class="mb-4">
+            <img src="{{ asset('image/0.jpg') }}" alt="{{ $settings['site_name'] }} Logo" class="hero-logo img-fluid" style="max-height: 120px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          </div>
           <h1 class="display-4 fw-bolder mb-3">{{ $settings['hero_title'] ?: 'خدمات التنظيف المتخصصة بأعلى معايير الجودة' }}</h1>
           <p class="lead mb-4">{{ $settings['hero_subtitle'] ?: 'نقدم حلولاً متكاملة لأعمال النظافة والصيانة لمنزلك أو شركتك' }}</p>
           <a href="/gallery" class="btn btn-light btn-lg">شاهد أعمالنا</a>
         </div>
       </section>
-
+      
       <!-- Statistics Section -->
-      <section class="py-5 bg-primary text-white">
+      <section class="py-6 bg-primary text-white">
         <div class="container">
           <div class="row text-center">
             <div class="col-md-3 mb-4">
               <div class="stat-item">
-                <h2 class="fw-bold display-4">{{ $stats['completed_projects'] }}+</h2>
+                <h2 class="fw-bold display-4 counter" data-target="+{{ $stats['completed_projects'] }}">0</h2>
                 <p class="mb-0">مشروع منجز</p>
               </div>
             </div>
             <div class="col-md-3 mb-4">
               <div class="stat-item">
-                <h2 class="fw-bold display-4">{{ $stats['service_requests'] }}+</h2>
+                <h2 class="fw-bold display-4 counter" data-target="+{{ $stats['service_requests'] }}">0</h2>
                 <p class="mb-0">طلب خدمة</p>
               </div>
             </div>
             <div class="col-md-3 mb-4">
               <div class="stat-item">
-                <h2 class="fw-bold display-4">{{ $stats['services_offered'] }}</h2>
+                <h2 class="fw-bold display-4 counter" data-target="+{{ $stats['services_offered'] }}">0</h2>
                 <p class="mb-0">خدمة متاحة</p>
               </div>
             </div>
             <div class="col-md-3 mb-4">
               <div class="stat-item">
-                <h2 class="fw-bold display-4">{{ $stats['years_experience'] }}+</h2>
+                <h2 class="fw-bold display-4 counter" data-target="+{{ $stats['years_experience'] }}">0</h2>
                 <p class="mb-0">سنوات خبرة</p>
               </div>
             </div>
@@ -217,58 +262,25 @@
           </div>
           <!-- Gallery Grid -->
           <div class="row gy-4">
-            <!-- Item 1 -->
-            <div class="col-lg-3 col-md-6 gallery-item" data-category="closet">
-              <div class="card shadow-sm h-100">
-                <img src="https://picsum.photos/seed/closet-home-1/600/400" class="card-img-top" alt="تنظيف خزان مياه">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">تنظيف خزان فيلا</h5>
-                  <p class="card-text">تنظيف وتعقيم كامل لخزان مياه أرضي لفيلا سكنية مع إزالة جميع الرواسب.</p>
+            @if(isset($galleryItems) && $galleryItems->count())
+              @foreach($galleryItems as $item)
+                <div class="col-lg-3 col-md-6 gallery-item" data-category="{{ $item->service?->slug ?? 'general' }}">
+                  <div class="card shadow-sm h-100">
+                    <img src="{{ asset('storage/'.$item->image) }}" class="card-img-top" alt="{{ $item->title }}">
+                    <div class="card-body">
+                      <h5 class="card-title fw-bold">{{ $item->title }}</h5>
+                      <p class="card-text">{{ Str::limit($item->description, 100) }}</p>
+                      <small>{{ $item->done_at->format('d F Y') }}</small>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-footer bg-transparent border-0 text-muted">
-                  <small>تاريخ الإنجاز: 25 أكتوبر 2023</small>
-                </div>
+              @endforeach
+            @else
+              <!-- Show placeholder if no items -->
+              <div class="col-12 text-center">
+                <p class="text-muted">لا توجد أعمال حالياً</p>
               </div>
-            </div>
-            <!-- Item 2 -->
-            <div class="col-lg-3 col-md-6 gallery-item" data-category="sewage">
-              <div class="card shadow-sm h-100">
-                <img src="https://picsum.photos/seed/sewage-home-1/600/400" class="card-img-top" alt="صيانة صرف صحي">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">تسليك مجاري رئيسية</h5>
-                  <p class="card-text">معالجة انسداد في شبكة الصرف الصحي لمبنى تجاري باستخدام تقنية الضغط العالي.</p>
-                </div>
-                 <div class="card-footer bg-transparent border-0 text-muted">
-                  <small>تاريخ الإنجاز: 12 سبتمبر 2023</small>
-                </div>
-              </div>
-            </div>
-            <!-- Item 3 -->
-            <div class="col-lg-3 col-md-6 gallery-item" data-category="closet">
-              <div class="card shadow-sm h-100">
-                <img src="https://picsum.photos/seed/closet-home-2/600/400" class="card-img-top" alt="تنظيف خزان علوي">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">صيانة خزان علوي</h5>
-                  <p class="card-text">فحص وتنظيف دوري لخزان مياه علوي لمجمع سكني لضمان جودة المياه.</p>
-                </div>
-                 <div class="card-footer bg-transparent border-0 text-muted">
-                  <small>تاريخ الإنجاز: 18 أغسطس 2023</small>
-                 </div>
-              </div>
-            </div>
-             <!-- Item 4 -->
-            <div class="col-lg-3 col-md-6 gallery-item" data-category="sewage">
-              <div class="card shadow-sm h-100">
-                <img src="https://picsum.photos/seed/sewage-home-2/600/400" class="card-img-top" alt="فحص صرف صحي">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">فحص بالكاميرا</h5>
-                  <p class="card-text">استخدام كاميرات متخصصة لتحديد مكان الانسداد بدقة في أنابيب الصرف لمنزل.</p>
-                </div>
-                 <div class="card-footer bg-transparent border-0 text-muted">
-                  <small>تاريخ الإنجاز: 05 يوليو 2023</small>
-                 </div>
-              </div>
-            </div>
+            @endif
           </div>
           <div class="text-center mt-3">
             <a href="/gallery" class="btn btn-outline-primary btn-lg">عرض كل الأعمال</a>
@@ -326,37 +338,173 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <p class="mb-0">&copy; 2024 {{ $settings['site_name'] }}. جميع الحقوق محفوظة.</p>
-              <p class="mb-0 text-white-50">رقم التواصل: {{ $settings['phone'] }}</p>
+    <footer class="bg-dark text-white py-5">
+      <div class="container">
+        <div class="row">
+          <!-- Company Info -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <!-- Logo -->
+            <div class="mb-3">
+              <img src="{{ asset('image/0.jpg') }}" alt="{{ $settings['site_name'] }} Logo" class="footer-logo img-fluid" style="max-height: 80px; border-radius: 8px;">
+            </div>
+            <h5 class="fw-bold mb-3">{{ $settings['site_name'] }}</h5>
+            <p class="text-white-50">
+              نقدم حلولاً متكاملة ومتخصصة في خدمات التنظيف والصيانة بأعلى معايير الجودة والاحترافية
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              @if(!empty($settings['facebook']))
+              <a href="{{ $settings['facebook'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              @endif
+              @if(!empty($settings['twitter']))
+              <a href="{{ $settings['twitter'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              @endif
+              @if(!empty($settings['instagram']))
+              <a href="{{ $settings['instagram'] }}" class="text-white-50 hover-white" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+              @endif
+            </div>
+          </div>
+          
+          <!-- Quick Links -->
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">روابط سريعة</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="/services" class="text-white-50 text-decoration-none hover-white">خدماتنا</a></li>
+              <li class="mb-2"><a href="/gallery" class="text-white-50 text-decoration-none hover-white">معرض الأعمال</a></li>
+              <li class="mb-2"><a href="/about" class="text-white-50 text-decoration-none hover-white">من نحن</a></li>
+              <li class="mb-2"><a href="/contact" class="text-white-50 text-decoration-none hover-white">اتصل بنا</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact Info -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">معلومات التواصل</h6>
+            <ul class="list-unstyled text-white-50">
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:{{ $settings['phone'] ?? '01000000000' }}" class="text-white-50 text-decoration-none hover-white">
+                  {{ $settings['phone'] ?? '01000000000' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fab fa-whatsapp me-2"></i>
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', '+2'.$settings['phone'] ?? '01000000000') }}" class="text-white-50 text-decoration-none hover-white" target="_blank">
+                  {{ $settings['phone'] ?? '01000000000' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:{{ $settings['email'] ?? 'info@example.com' }}" class="text-white-50 text-decoration-none hover-white">
+                  {{ $settings['email'] ?? 'info@example.com' }}
+                </a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                {{ $settings['address'] ?? 'العنوان غير محدد' }}
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Working Hours -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">ساعات العمل</h6>
+            <ul class="list-unstyled text-white-50">
+              <li class="mb-2">السبت - الخميس: 9:00 ص - 8:00 م</li>
+              <li class="mb-2">الجمعة: 10:00 ص - 6:00 م</li>
+              <li class="mb-2">الطوارئ: متاح على مدار 24 ساعة</li>
+            </ul>
+          </div>
         </div>
+        
+        <hr class="border-secondary my-4">
+        
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0 text-white-50">
+              &copy; {{ date('Y') }} {{ $settings['site_name'] }}. جميع الحقوق محفوظة.
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0 text-white-50">
+              صُمم بـ ❤️ بواسطة فريق {{ $settings['site_name'] }}
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="module" src="/tsx/index.tsx"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('.filter-btn');
-        const items = document.querySelectorAll('.gallery-item');
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            items.forEach(item => {
-              const category = item.getAttribute('data-category');
-              const col = item.closest('[class*="col-"]') || item;
-              if (filter === 'all' || category === filter) {
-                col.classList.remove('d-none');
-              } else {
-                col.classList.add('d-none');
-              }
+        document.addEventListener('DOMContentLoaded', function () {
+          const buttons = document.querySelectorAll('.filter-btn');
+          const items = document.querySelectorAll('.gallery-item');
+          buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              buttons.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              const filter = btn.getAttribute('data-filter');
+              items.forEach(item => {
+                const category = item.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                  item.style.display = 'block';
+                } else {
+                  item.style.display = 'none';
+                }
+              });
             });
           });
+
+          // Counter Animation for Statistics - Trigger on scroll
+          const counters = document.querySelectorAll('.counter');
+          const speed = 50; // Slower animation speed for better visibility
+          let hasAnimated = false;
+
+          const countUp = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / speed;
+            
+            const updateCount = () => {
+              const current = +counter.innerText;
+              
+              if (current < target) {
+                counter.innerText = Math.ceil(current + increment);
+                setTimeout(updateCount, 50); // Slower update frequency
+              } else {
+                counter.innerText = target + (counter.getAttribute('data-target') === counter.innerText ? '' : '+');
+              }
+            };
+            
+            updateCount();
+          };
+
+          // Intersection Observer to trigger animation when section is visible
+          const observerOptions = {
+            threshold: 0.5, // Start animation when 50% of section is visible
+            rootMargin: '0px 0px -100px 0px' // Start a bit earlier
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                counters.forEach(counter => countUp(counter));
+              }
+            });
+          }, observerOptions);
+
+          // Observe the statistics section
+          const statsSection = document.querySelector('.bg-primary.text-white.py-6');
+          if (statsSection) {
+            observer.observe(statsSection);
+          }
         });
-      });
-    </script>
+      </script>
   </body>
 </html>
