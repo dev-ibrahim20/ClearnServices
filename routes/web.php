@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Service;
 use App\Models\GalleryItem;
 use App\Http\Controllers\Front\RequestController;
+use Illuminate\Http\Request;
+use App\Models\Setting;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,15 +27,29 @@ Route::get('/', function () {
     return view('home', compact('latestServices','allServices'));
 });
 
-// Gallery route (public) using DB
-Route::get('/gallery', function () {
-    $items = GalleryItem::with('service')->latest('done_at')->latest()->paginate(12);
-    return view('gallery', compact('items'));
+// Gallery route (public) using DB with optional service filter
+Route::get('/gallery', function (Request $request) {
+    $query = GalleryItem::with('service')->latest('done_at')->latest();
+    $currentService = null;
+    if ($slug = $request->query('service')) {
+        $currentService = Service::where('slug', $slug)->first();
+        if ($currentService) {
+            $query->where('service_id', $currentService->id);
+        }
+    }
+    $perPage = (int) (Setting::getValue('gallery_per_page', 12));
+    $items = $query->paginate($perPage > 0 ? $perPage : 12);
+    $services = Service::orderBy('name')->get(['name','slug']);
+    if ($request->ajax()) {
+        return view('partials.gallery-grid', compact('items'));
+    }
+    return view('gallery', compact('items','services','currentService'));
 })->name('gallery');
 
 // Services listing (public)
 Route::get('/services', function () {
-    $services = Service::latest()->paginate(12);
+    $perPage = (int) (Setting::getValue('services_per_page', 12));
+    $services = Service::latest()->paginate($perPage > 0 ? $perPage : 12);
     return view('services', compact('services'));
 })->name('services');
 
@@ -74,4 +90,8 @@ Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
     Route::get('/requests', [\App\Http\Controllers\Admin\RequestController::class, 'index'])->name('admin.requests.index');
     Route::get('/requests/{request}', [\App\Http\Controllers\Admin\RequestController::class, 'show'])->name('admin.requests.show');
     Route::delete('/requests/{request}', [\App\Http\Controllers\Admin\RequestController::class, 'destroy'])->name('admin.requests.destroy');
+
+    // Settings
+    Route::get('/settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('admin.settings.index');
+    Route::post('/settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('admin.settings.update');
 });

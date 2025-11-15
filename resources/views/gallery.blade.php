@@ -26,6 +26,21 @@
       .btn-group .btn { margin: 0.25rem; }
       .gallery-item .card { border-radius: 1rem; overflow: hidden; border: 0; }
       .hero-small { background: #0d6efd; color: #fff; padding: 3rem 0; }
+      /* Smooth fade for partial updates */
+      #gallery-partial-container { position: relative; transition: opacity .2s ease; }
+      #gallery-partial-container.loading { opacity: .35; }
+      /* Card appear animation */
+      @keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      #gallery-partial-container .gallery-item { animation: cardIn .35s ease both; }
+      #gallery-partial-container .gallery-item:nth-child(1) { animation-delay: .03s }
+      #gallery-partial-container .gallery-item:nth-child(2) { animation-delay: .06s }
+      #gallery-partial-container .gallery-item:nth-child(3) { animation-delay: .09s }
+      #gallery-partial-container .gallery-item:nth-child(4) { animation-delay: .12s }
+      #gallery-partial-container .gallery-item:nth-child(5) { animation-delay: .15s }
+      #gallery-partial-container .gallery-item:nth-child(6) { animation-delay: .18s }
+      /* Spinner overlay */
+      .gallery-loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0; transition:opacity .2s ease; }
+      #gallery-partial-container.loading .gallery-loading { opacity:1; }
     </style>
   </head>
   <body>
@@ -69,42 +84,21 @@
         <div class="container">
           <!-- Filter Buttons -->
           <div class="d-flex justify-content-center mb-4 btn-group" role="group">
-            <button type="button" class="btn btn-outline-primary filter-btn active" data-filter="all">الكل</button>
-            <button type="button" class="btn btn-outline-primary filter-btn" data-filter="closet">تنظيف خزائن</button>
-            <button type="button" class="btn btn-outline-primary filter-btn" data-filter="sewage">صيانة صرف صحي</button>
+            <a href="{{ url('/gallery') }}" class="btn btn-outline-primary filter-btn {{ empty($currentService) ? 'active' : '' }}">الكل</a>
+            @if(isset($services) && $services->count())
+              @foreach($services as $svc)
+                <a href="{{ url('/gallery?service='.$svc->slug) }}" class="btn btn-outline-primary filter-btn {{ isset($currentService) && $currentService && $currentService->slug === $svc->slug ? 'active' : '' }}">{{ $svc->name }}</a>
+              @endforeach
+            @endif
           </div>
           <!-- Gallery Grid -->
-          <div class="row gy-4">
-            @forelse($items as $it)
-              <div class="col-lg-3 col-md-6 gallery-item" data-category="{{ $it->category }}">
-                <div class="card shadow-sm h-100">
-                  @if($it->image)
-                    <img src="{{ asset('storage/'.$it->image) }}" class="card-img-top" alt="{{ $it->title }}">
-                  @endif
-                  <div class="card-body">
-                    <h5 class="card-title fw-bold">{{ $it->title }}</h5>
-                    @if($it->service)
-                      <div class="text-primary small mb-2">الخدمة: {{ $it->service->name }}</div>
-                    @endif
-                    @if($it->description)
-                      <p class="card-text">{{ $it->description }}</p>
-                    @endif
-                  </div>
-                  <div class="card-footer bg-transparent border-0 text-muted">
-                    <small>
-                      @if($it->done_at)
-                        تاريخ الإنجاز: {{ $it->done_at->format('d M Y') }}
-                      @endif
-                    </small>
-                  </div>
-                </div>
+          <div id="gallery-partial-container">
+            <div class="gallery-loading">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
               </div>
-            @empty
-              <div class="col-12 text-center text-muted py-5">لا توجد عناصر في المعرض بعد.</div>
-            @endforelse
-          </div>
-          <div class="mt-4">
-            {{ $items->links() }}
+            </div>
+            @include('partials.gallery-grid',['items'=>$items])
           </div>
         </div>
       </section>
@@ -122,24 +116,54 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('.filter-btn');
-        const items = document.querySelectorAll('.gallery-item');
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            items.forEach(item => {
-              const category = item.getAttribute('data-category');
-              const col = item.closest('[class*="col-"]') || item;
-              if (filter === 'all' || category === filter) {
-                col.classList.remove('d-none');
-              } else {
-                col.classList.add('d-none');
-              }
+        function loadGallery(url) {
+          fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(res => res.text())
+            .then(html => {
+              const container = document.querySelector('#gallery-partial-container');
+              if (!container) return;
+              container.classList.add('loading');
+              // Replace inner HTML while keeping spinner element
+              const spinner = container.querySelector('.gallery-loading');
+              container.innerHTML = '';
+              if (spinner) container.appendChild(spinner);
+              container.insertAdjacentHTML('beforeend', html);
+              // small timeout to allow CSS transition
+              setTimeout(()=>{ container.classList.remove('loading'); }, 50);
+              bindPagination();
+            });
+        }
+
+        function bindFilters() {
+          document.querySelectorAll('.filter-btn').forEach(link => {
+            link.addEventListener('click', function (e) {
+              const href = this.getAttribute('href');
+              if (!href) return;
+              e.preventDefault();
+              history.pushState({}, '', href);
+              document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              const container = document.querySelector('#gallery-partial-container');
+              if (container) container.classList.add('loading');
+              loadGallery(href);
             });
           });
-        });
+        }
+
+        function bindPagination() {
+          document.querySelectorAll('#gallery-pagination a').forEach(a => {
+            a.addEventListener('click', function (e) {
+              e.preventDefault();
+              const href = this.getAttribute('href');
+              if (!href) return;
+              history.pushState({}, '', href);
+              loadGallery(href);
+            });
+          });
+        }
+
+        bindFilters();
+        bindPagination();
       });
     </script>
   </body>
