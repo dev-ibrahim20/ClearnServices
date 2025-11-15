@@ -71,6 +71,10 @@
               <label class="form-label">أعمال المعرض لكل صفحة</label>
               <input type="number" name="gallery_per_page" min="4" max="48" class="form-control" value="{{ $settings['gallery_per_page'] }}">
             </div>
+            <div class="col-md-4">
+              <label class="form-label">سنوات الخبرة</label>
+              <input type="number" name="years_experience" min="1" max="50" class="form-control" value="{{ $settings['years_experience'] }}">
+            </div>
           </div>
         </div>
 

@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'seo_description' => \App\Models\Setting::getValue('seo_description', ''),
             'services_per_page' => \App\Models\Setting::getValue('services_per_page', 12),
             'gallery_per_page' => \App\Models\Setting::getValue('gallery_per_page', 12),
+            'years_experience' => \App\Models\Setting::getValue('years_experience', 5),
         ]);
     }
 }

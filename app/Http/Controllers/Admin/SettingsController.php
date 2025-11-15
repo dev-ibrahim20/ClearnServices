@@ -22,6 +22,7 @@ class SettingsController extends Controller
             'seo_description' => Setting::getValue('seo_description', ''),
             'services_per_page' => Setting::getValue('services_per_page', 12),
             'gallery_per_page' => Setting::getValue('gallery_per_page', 12),
+            'years_experience' => Setting::getValue('years_experience', 5),
         ];
         return view('admin.settings.index', compact('settings'));
     }

@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <div class="text-muted">إجمالي الخدمات</div>
-            <div class="h4 fw-bold">3</div>
+            <div class="h4 fw-bold">{{ $stats['total_services'] ?? 0 }}</div>
           </div>
           <div class="display-6 text-primary">🧰</div>
         </div>
@@ -23,8 +23,8 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <div class="text-muted">طلبات هذا الشهر</div>
-            <div class="h4 fw-bold">18</div>
+            <div class="text-muted">معرض الأعمال</div>
+            <div class="h4 fw-bold">{{ $stats['total_gallery_items'] ?? 0 }}</div>
           </div>
           <div class="display-6 text-success">📦</div>
         </div>
@@ -36,10 +36,10 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <div class="text-muted">أعمال المعرض</div>
-            <div class="h4 fw-bold">12</div>
+            <div class="text-muted">إجمالي الطلبات</div>
+            <div class="h4 fw-bold">{{ $stats['total_requests'] ?? 0 }}</div>
           </div>
-          <div class="display-6 text-warning">🖼️</div>
+          <div class="display-6 text-warning">�</div>
         </div>
       </div>
     </div>
@@ -49,10 +49,10 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <div class="text-muted">الرسائل الجديدة</div>
-            <div class="h4 fw-bold">5</div>
+            <div class="text-muted">الطلبات الجديدة</div>
+            <div class="h4 fw-bold">{{ $stats['recent_requests'] ?? 0 }}</div>
           </div>
-          <div class="display-6 text-danger">✉️</div>
+          <div class="display-6 text-danger">⏰</div>
         </div>
       </div>
     </div>

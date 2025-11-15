@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>خدمات مؤسسة الكمال | معرض الأعمال</title>
+    <title>{{ $settings['site_name'] }} | معرض الأعمال</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Google Fonts -->
@@ -48,7 +48,7 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
-          <a class="navbar-brand fw-bold text-primary" href="/">مؤسسة الكمال</a>
+          <a class="navbar-brand fw-bold text-primary" href="/">{{ $settings['site_name'] }}</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -64,10 +64,10 @@
                 <a class="nav-link active" aria-current="page" href="/gallery">معرض الأعمال</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#contact">اتصل بنا</a>
+                <a class="nav-link" href="/#contact">تواصل معنا</a>
               </li>
             </ul>
-            <a href="/#contact" class="btn btn-primary d-none d-lg-block">اطلب خدمة الآن</a>
+            <a href="/#contact" class="btn btn-primary d-none d-lg-block">{{ $settings['cta_text'] }}</a>
           </div>
         </div>
       </nav>
@@ -107,8 +107,8 @@
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
       <div class="container">
-        <p class="mb-0">&copy; 2024 مؤسسة الكمال. جميع الحقوق محفوظة.</p>
-        <p class="mb-0 text-white-50">للتواصل السريع: 966500000000+</p>
+        <p class="mb-0">&copy; 2024 {{ $settings['site_name'] }}. جميع الحقوق محفوظة.</p>
+        <p class="mb-0 text-white-50">رقم التواصل: {{ $settings['phone'] }}</p>
       </div>
     </footer>
 

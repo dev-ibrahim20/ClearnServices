@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>خدمات مؤسسة الكمال | معرض الأعمال</title>
+    <title>{{ $settings['site_name'] }} | الرئيسية</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Google Fonts -->
@@ -89,7 +89,7 @@
                 <a class="nav-link" href="#contact">اتصل بنا</a>
               </li>
             </ul>
-            <a href="#contact" class="btn btn-primary d-none d-lg-block">اطلب خدمة الآن</a>
+            <a href="#contact" class="btn btn-primary d-none d-lg-block">{{ $settings['cta_text'] }}</a>
           </div>
         </div>
       </nav>
@@ -99,9 +99,41 @@
       <!-- Hero Section -->
       <section id="hero" class="hero-bg text-center">
         <div class="container">
-          <h1 class="display-4 fw-bolder mb-3">خدمات احترافية يمكنك الوثوق بها</h1>
-          <p class="lead mb-4">نستعرض لكم جودة أعمالنا في تنظيف الخزائن وصيانة الصرف الصحي.</p>
+          <h1 class="display-4 fw-bolder mb-3">{{ $settings['hero_title'] ?: 'خدمات التنظيف المتخصصة بأعلى معايير الجودة' }}</h1>
+          <p class="lead mb-4">{{ $settings['hero_subtitle'] ?: 'نقدم حلولاً متكاملة لأعمال النظافة والصيانة لمنزلك أو شركتك' }}</p>
           <a href="/gallery" class="btn btn-light btn-lg">شاهد أعمالنا</a>
+        </div>
+      </section>
+
+      <!-- Statistics Section -->
+      <section class="py-5 bg-primary text-white">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-3 mb-4">
+              <div class="stat-item">
+                <h2 class="fw-bold display-4">{{ $stats['completed_projects'] }}+</h2>
+                <p class="mb-0">مشروع منجز</p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4">
+              <div class="stat-item">
+                <h2 class="fw-bold display-4">{{ $stats['service_requests'] }}+</h2>
+                <p class="mb-0">طلب خدمة</p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4">
+              <div class="stat-item">
+                <h2 class="fw-bold display-4">{{ $stats['services_offered'] }}</h2>
+                <p class="mb-0">خدمة متاحة</p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4">
+              <div class="stat-item">
+                <h2 class="fw-bold display-4">{{ $stats['years_experience'] }}+</h2>
+                <p class="mb-0">سنوات خبرة</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -296,8 +328,8 @@
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
-            <p class="mb-0">&copy; 2024 مؤسسة الكمال. جميع الحقوق محفوظة.</p>
-            <p class="mb-0 text-white-50">للتواصل السريع: 966500000000+</p>
+            <p class="mb-0">&copy; 2024 {{ $settings['site_name'] }}. جميع الحقوق محفوظة.</p>
+              <p class="mb-0 text-white-50">رقم التواصل: {{ $settings['phone'] }}</p>
         </div>
     </footer>
 

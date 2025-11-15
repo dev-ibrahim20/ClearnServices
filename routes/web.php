@@ -24,7 +24,19 @@ use Inertia\Inertia;
 Route::get('/', function () {
     $latestServices = Service::latest()->take(3)->get();
     $allServices = Service::orderBy('name')->get(['slug','name']);
-    return view('home', compact('latestServices','allServices'));
+    
+    // Get real gallery items (4 items)
+    $galleryItems = GalleryItem::with('service')->latest('done_at')->latest()->take(4)->get();
+    
+    // Get real statistics from database
+    $stats = [
+        'completed_projects' => GalleryItem::count(),
+        'service_requests' => \App\Models\ServiceRequest::count(),
+        'services_offered' => Service::count(),
+        'years_experience' => \App\Models\Setting::getValue('years_experience', 5),
+    ];
+    
+    return view('home', compact('latestServices','allServices','galleryItems','stats'));
 });
 
 // Gallery route (public) using DB with optional service filter
@@ -77,7 +89,14 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        // Get real statistics from database
+        $stats = [
+            'total_services' => Service::count(),
+            'total_gallery_items' => GalleryItem::count(),
+            'total_requests' => \App\Models\ServiceRequest::count(),
+            'recent_requests' => \App\Models\ServiceRequest::where('created_at', '>=', now()->subDay())->count(),
+        ];
+        return view('admin.dashboard', compact('stats'));
     })->name('admin.dashboard');
 
     // Services CRUD
